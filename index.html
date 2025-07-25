@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>✞</title>
+  <title>✮</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- manifest + أيقونة -->
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="images/background.jpg" />
 
@@ -83,58 +85,45 @@
 </head>
 <body>
   <div class="container">
-    <h1>✞</h1>
+    <h1>✮</h1>
     <div class="btn-group">
       <button onclick="showPrayer('salah')">الصلاة</button>
       <button onclick="showPrayer('iman')">نص الإيمان</button>
       <button onclick="showPrayer('glory')">المجد</button>
       <button onclick="showPrayer('night')">صلاة قبل النوم</button>
       <button onclick="showPrayer('morning')">صلاة الصبح</button>
-      <button onclick="subscribeToNotifications()">تفعيل الإشعارات</button>
     </div>
 
-    <!-- صلواتك كما هي هنا... -->
-    <!-- (... نفس نصوص الصلاة التي وضعتها سابقًا ...) -->
-
+    <div id="salah" class="prayer" style="display:block;">
+      أبانا...
+    </div>
+    <div id="iman" class="prayer">
+      نؤمن...
+    </div>
+    <div id="glory" class="prayer">
+      ألمجد...
+    </div>
+    <div id="night" class="prayer">
+      إني أختُم...
+    </div>
+    <div id="morning" class="prayer">
+      مباركٌ أنت...
+    </div>
   </div>
 
+  <!-- ربط Firebase -->
+  <script type="module" src="firebase.js"></script>
+
+  <!-- تسجيل Service Worker -->
   <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('firebase-messaging-sw.js')
+        .then((reg) => console.log("Service Worker مسجل", reg))
+        .catch((err) => console.error("فشل SW", err));
+    }
     function showPrayer(id) {
       document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
       document.getElementById(id).style.display = 'block';
-    }
-
-    async function subscribeToNotifications() {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
-        const { getMessaging, getToken } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js');
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyBzDjHHYRdjYYKD3ijzdfU2_Q-V-x2xT-Y",
-          authDomain: "fadi-3b10f.firebaseapp.com",
-          projectId: "fadi-3b10f",
-          storageBucket: "fadi-3b10f.firebaseapp.com",
-          messagingSenderId: "416625022398",
-          appId: "1:416625022398:web:b9351ddd953b775a9655ef",
-          measurementId: "G-C5CBQGK5SE"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const messaging = getMessaging(app);
-
-        try {
-          const token = await getToken(messaging, {
-            vapidKey: "YOUR_PUBLIC_VAPID_KEY" // بدّك تبدلو من Firebase Settings
-          });
-          console.log("FCM Token:", token);
-          alert("تم تفعيل الإشعارات");
-        } catch (err) {
-          console.error("فشل في جلب التوكن", err);
-        }
-      } else {
-        alert("تم رفض صلاحية الإشعارات");
-      }
     }
   </script>
 </body>
