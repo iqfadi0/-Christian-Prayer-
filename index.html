@@ -1,126 +1,125 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>✮</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- manifest + أيقونة -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="images/background.jpg" />
-
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Tajawal', sans-serif;
-    }
-    body {
-      background-image: url('images/background.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: #fff;
-      padding: 20px;
-      backdrop-filter: brightness(0.6);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>صلوات مسيحية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+  }
+  body {
+    background-image: url('https://i.ibb.co/R0pYx4c/bg-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 20px;
+    backdrop-filter: brightness(0.6);
+  }
+  .container {
+    max-width: 700px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #f2d057;
+  }
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  button {
+    background-color: #f2d057;
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #e4bc1b;
+  }
+  .prayer {
+    white-space: pre-wrap;
+    line-height: 1.8;
+    font-size: 16px;
+    display: none;
+  }
+  @media (max-width: 600px) {
     .container {
-      max-width: 700px;
-      margin: auto;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      padding: 15px;
     }
     h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 28px;
-      color: #f2d057;
-    }
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
+      font-size: 22px;
     }
     button {
-      background-color: #f2d057;
-      color: #000;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-      transition: 0.3s;
+      padding: 8px 12px;
+      font-size: 14px;
     }
-    button:hover {
-      background-color: #e4bc1b;
-    }
-    .prayer {
-      white-space: pre-wrap;
-      line-height: 1.8;
-      font-size: 24px;
-      display: none;
-    }
-    @media (max-width: 600px) {
-      .container {
-        padding: 15px;
-      }
-      h1 {
-        font-size: 22px;
-      }
-      button {
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-      .prayer {
-        font-size: 22px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div class="container">
-    <h1>✮</h1>
+    <h1>الصلوات المسيحية</h1>
     <div class="btn-group">
       <button onclick="showPrayer('salah')">الصلاة</button>
       <button onclick="showPrayer('iman')">نص الإيمان</button>
-      <button onclick="showPrayer('glory')">المجد</button>
       <button onclick="showPrayer('night')">صلاة قبل النوم</button>
       <button onclick="showPrayer('morning')">صلاة الصبح</button>
     </div>
 
     <div id="salah" class="prayer" style="display:block;">
-      أبانا...
+أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك، لتكن مشيئتك كما في السّماء كذلك على الأرض. أعطنا خبزنا كفاف يومنا، واغفر لنا ذنوبنا وخطايانا كما نحن نغفر  لِمَن أخطأ إلينا، ولا تُدخلنا في التجربة، لكن نجّنا من الشّرّير امين .
+
+السلام عليك يا مريم يا ممتلئة نعمة، الرب معك، مباركة أنت في النساء، و مباركة ثمرة بطنك، سيدنا يسوع المسيح. يا قديسة مريم، يا والدة الله، صلّي لأجلنا نحن الخطأة، الآن وفي ساعة موتنا امين .
     </div>
+
     <div id="iman" class="prayer">
-      نؤمن...
+نؤمن بإله واحد، آب ضابط الكل خالق السماء والأرض كلّ ما يُرى وما لا يُرى وبربٍّ واحد يسوع المسيح أبن الله الوحيد المولود من الآب قبلَ كل الدهور إله من إله، نور من نور، إله حق من إله حق، مولود غير مخلوق، مساوٍ للآب في الجوهر، الذي به كان كلّ شيء الذي من أجلنا نحنُ البشر ومن أجلِ خلاصنا 
+نزل من السماء وتجسّد من الروح القدس ومن مريم العذراء وصارَ إنساناً وصُلبَ عنّا على عهدِ بيلاطس البنطي تألّم ومات وقُبِرَ وقام في اليوم الثالث كما جاء في الكتب وصعِدَ إلى السماء وجلس عن يمين الله الآب وأيضًا يأتي بمجدٍ عظيم ليدينَ الأحياء والأموات الذي لا فناء لمُلكه. 
+ونؤمن بالروح القدس الرّبّ المُحيي، المنبثق من الآب والإبن الذي هوَ مع الآب والإبن يُسجَد لهُ ويُمَجّد، الناطق بالأنبياء والرُسل وبكنيسة واحدة، جامِعة، مقّدَسة، رَسوليّة ونعترف بمعموديّة واحدة لمغفرة الخَطايا 
+ونترَجّى قيامَة الموتى والحياة في الدهرِ الآتي، آمين.
     </div>
-    <div id="glory" class="prayer">
-      ألمجد...
-    </div>
+
     <div id="night" class="prayer">
-      إني أختُم...
+اني أختُم، يا ربّ نهاري بشكركَ، كما افتتحتُهُ بتسبيحِكَ
+فاختم بالخير كلّ أعمال حياتي
+لتكن يا ربّ، خدمتُنا لرضاك
+وصلاتُنا لحمدك
+وحياتُنا لمجدك
+أحِلَّ، يا ربّ، 
+حُبك في نفوسنا ونورَك في ضمائرنا
+وسلامَك في قلوبنا
+ومع غياب شمسِ هذا النهار كُنْ لنا شمساً لا تغيب
+وعند رقادنا في هذا الليل أرمقنا بعين لا تنام
+ولا تحسب علينا، يا ربّ، هفواتِنا
+أعطنا ليلاً هادئاً ونوماً هنيئاً ويقظة نشيطة
+وصباحاً يبشرُ بالأفراح
+بشفاعة أمك مريم، فرح البيعة وأمِّ المحبة
+ونُصعد لك المجد الآن والى الأبد. آمين.
     </div>
+
     <div id="morning" class="prayer">
-      مباركٌ أنت...
+مباركٌ أنت، أيّها المسيح، يا من بك طلع النهار وزالت ظلمةُ الليل يا نور الحقّ وشمس البر يا من حللتَ في البيعة فاستنارتْ وفي الأرض فابتهجتْ يا من دنا منك الخطأة فتبرّروا والضالونَ فاهتدَوا والعميانُ فأبصروا يا من ايقظتنا في هذا الصباح ووهبتنا نهاراً نفرح به نسألك أن تنير عقولَنا وقلوبَنا بنور محبتك وليكن لنا مطلعُ صباحِكَ فاتحةَ كلِّ خير فسدّد خطانا على سنّة مشوراتِكَ ولا تسمح للخطيئة بأن تستعبدَنا بل حرِّرنا من ظلمة الأميال وثبتنا في مقاصدنا وأنرنا في تصرفاتنا اليومَ وفي كلّ أيّام حياتِنا فنرتل مبتهجين، لك أيها المسيح ولأبيك وروحِك القدوس الآن والى الأبد، آمين.
     </div>
   </div>
 
-  <!-- ربط Firebase -->
-  <script type="module" src="firebase.js"></script>
-
-  <!-- تسجيل Service Worker -->
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('firebase-messaging-sw.js')
-        .then((reg) => console.log("Service Worker مسجل", reg))
-        .catch((err) => console.error("فشل SW", err));
-    }
     function showPrayer(id) {
       document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
       document.getElementById(id).style.display = 'block';
