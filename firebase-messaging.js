@@ -1,3 +1,4 @@
+// firebase-messaging.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging.js";
 
@@ -16,23 +17,38 @@ const VAPID_KEY = "BIoNPdJwuJxVAzCGxJLxmiQCS4CnUnlajuykQgdsBFht8JvC9RCvAS82EXVvb
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-Notification.requestPermission().then((permission) => {
-  if (permission === 'granted') {
-    getToken(messaging, { vapidKey: VAPID_KEY }).then((currentToken) => {
-      if (currentToken) {
-        console.log('FCM Token:', currentToken);
-        // يمكنك تخزين هذا التوكن عندك في قاعدة بيانات أو سيرفر
-      } else {
-        console.log('No registration token available.');
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/firebase-messaging-sw.js')
+    .then((registration) => {
+      console.log('Service Worker registered:', registration);
+
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          getToken(messaging, { vapidKey: VAPID_KEY, serviceWorkerRegistration: registration })
+            .then((currentToken) => {
+              if (currentToken) {
+                console.log('FCM Token:', currentToken);
+                // هنا خزّن التوكن في سيرفرك أو استعمله حسب حاجتك
+              } else {
+                console.log('No registration token available.');
+              }
+            })
+            .catch((err) => {
+              console.log('Error getting token:', err);
+            });
+        } else {
+          console.log('Notification permission denied');
+        }
+      });
+    })
+    .catch((err) => {
+      console.log('Service Worker registration failed:', err);
     });
-  } else {
-    console.log('Notification permission denied');
-  }
-});
+} else {
+  console.log('Service workers are not supported.');
+}
 
 onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
+  console.log('Message received in foreground: ', payload);
+  // هنا يمكنك عرض إشعار أو تحديث الصفحة حسب الرسالة
 });
