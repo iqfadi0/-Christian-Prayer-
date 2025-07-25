@@ -1,18 +1,110 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>تجربة خلفية</title>
-<style>
-  body {
-    height: 100vh;
-    background-image: url('https://i.ibb.co/R0pYx4c/bg-image.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صلوات مسيحية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Tajawal', sans-serif;
+    }
+    body {
+      background-image: url('images/background.jpg'); /* ✅ صورة من داخل الريبو */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      padding: 20px;
+      backdrop-filter: brightness(0.6);
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+      color: #f2d057;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #f2d057;
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #e4bc1b;
+    }
+    .prayer {
+      white-space: pre-wrap;
+      line-height: 1.8;
+      font-size: 16px;
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>الصلوات المسيحية</h1>
+    <div class="btn-group">
+      <button onclick="showPrayer('salah')">الصلاة</button>
+      <button onclick="showPrayer('iman')">نص الإيمان</button>
+      <button onclick="showPrayer('night')">صلاة قبل النوم</button>
+      <button onclick="showPrayer('morning')">صلاة الصبح</button>
+    </div>
+
+    <div id="salah" class="prayer" style="display:block;">
+      أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك...
+    </div>
+
+    <div id="iman" class="prayer">
+      نؤمن بإله واحد، آب ضابط الكل خالق السماء...
+    </div>
+
+    <div id="night" class="prayer">
+      اني أختُم، يا ربّ نهاري بشكركَ، كما افتتحتُهُ...
+    </div>
+
+    <div id="morning" class="prayer">
+      مباركٌ أنت، أيّها المسيح، يا من بك طلع النهار...
+    </div>
+  </div>
+
+  <script>
+    function showPrayer(id) {
+      document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
 </body>
 </html>
