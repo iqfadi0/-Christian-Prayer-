@@ -56,6 +56,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px; /* حجم خط الأزرار ثابت */
       transition: 0.3s;
     }
     button:hover {
@@ -64,7 +65,7 @@
     .prayer {
       white-space: pre-wrap;
       line-height: 1.8;
-      font-size: 16px;
+      font-size: 20px; /* حجم خط الصلوات أكبر */
       display: none;
     }
     @media (max-width: 600px) {
@@ -76,7 +77,10 @@
       }
       button {
         padding: 8px 12px;
-        font-size: 14px;
+        font-size: 14px; /* حجم خط الأزرار يتغير بشكل متناسب */
+      }
+      .prayer {
+        font-size: 18px; /* تكبير مناسب للنصوص على الشاشات الصغيرة */
       }
     }
   </style>
