@@ -6,10 +6,7 @@
   <title>✞</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
   
-  <!-- ربط ملف manifest -->
   <link rel="manifest" href="manifest.json" />
-  
-  <!-- أيقونة الموقع للـ Add to Home Screen -->
   <link rel="apple-touch-icon" href="images/background.jpg" />
 
   <style>
@@ -22,7 +19,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-attachment: local;
       color: #fff;
       padding: 20px;
       backdrop-filter: brightness(0.6);
@@ -34,6 +31,7 @@
       border-radius: 16px;
       padding: 30px;
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      min-height: 600px;
     }
     h1 {
       text-align: center;
@@ -56,7 +54,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 16px; /* حجم خط الأزرار ثابت */
+      font-size: 16px;
       transition: 0.3s;
     }
     button:hover {
@@ -65,7 +63,7 @@
     .prayer {
       white-space: pre-wrap;
       line-height: 1.8;
-      font-size: 24px; /* حجم خط أكبر */
+      font-size: 24px;
       display: none;
     }
     @media (max-width: 600px) {
@@ -77,10 +75,10 @@
       }
       button {
         padding: 8px 12px;
-        font-size: 14px; /* حجم خط الأزرار يتغير بشكل متناسب */
+        font-size: 14px;
       }
       .prayer {
-        font-size: 22px; /* تكبير مناسب للجوال */
+        font-size: 22px;
       }
     }
   </style>
@@ -93,6 +91,7 @@
       <button onclick="showPrayer('iman')">نص الإيمان</button>
       <button onclick="showPrayer('glory')">المجد</button>
       <button onclick="showPrayer('night')">صلاة قبل النوم</button>
+      <button onclick="showPrayer('night2')">صلاة قبل النوم 2</button>
       <button onclick="showPrayer('morning')">صلاة الصبح</button>
     </div>
 
@@ -142,6 +141,20 @@
       وصباحاً يبشرُ بالأفراح،  
       بشفاعة أمك مريم، فرح البيعة وأمِّ المحبة،  
       ونُصعد لك المجد، الآن والى الأبد. آمين.
+    </div>
+
+    <div id="night2" class="prayer">
+      يا رب،  
+      بشكرك من كل قلبي على هاليوم.  
+      بسلمك كل تعب مرق، وكل وجع حسيت فيه، وكل هم حملته.  
+      بس كمان، بسلمك اللحظات الحلوة والسعيدة، لأنك كنت فيها، وبتضل فيها النعمة منك.  
+      علّمني يا رب، شاركك بكل لحظة ألم، وما خبّي عنك شي، لأنك بتفهمني.  
+      وعلّمني كمان، إفرح معك،  
+      وتكون فرحتي دايمًا نابعة من حضورك.  
+      يا رب،  
+      بدي حس بوجودك بكل لحظة من نهاري، لأنّي بعرف، من دونك ما بقدر أعمل شي.  
+      كون دايمًا معي، وسندني بنعمتك.  
+      آمين.
     </div>
 
     <div id="morning" class="prayer">
