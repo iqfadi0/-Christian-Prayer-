@@ -19,7 +19,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed; /* الخلفية ثابتة */
+      background-attachment: fixed; /* هنا تم التعديل: تجعل الخلفية ثابتة */
       color: #fff;
       padding: 20px;
       backdrop-filter: brightness(0.6);
@@ -65,27 +65,6 @@
       line-height: 1.8;
       font-size: 24px;
       display: none;
-      margin-top: 20px;
-    }
-    #addPrayerForm, #deletePrayerForm {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      display: none;
-    }
-    input[type="text"], textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 6px;
-      margin-bottom: 12px;
-      border-radius: 6px;
-      border: none;
-      font-size: 16px;
-      resize: vertical;
-    }
-    textarea {
-      min-height: 80px;
     }
     @media (max-width: 600px) {
       .container {
@@ -107,232 +86,99 @@
 <body>
   <div class="container">
     <h1>✞</h1>
-    <div class="btn-group" id="prayerButtons">
-      <!-- أزرار الصلوات ستوضع هنا ديناميكياً -->
-    </div>
-
     <div class="btn-group">
-      <button onclick="toggleAddPrayer()">إضافة صلاة</button>
-      <button onclick="toggleDeletePrayer()">حذف صلاة</button>
+      <button onclick="showPrayer('salah')">الصلاة</button>
+      <button onclick="showPrayer('iman')">نص الإيمان</button>
+      <button onclick="showPrayer('glory')">المجد</button>
+      <button onclick="showPrayer('night')">صلاة قبل النوم</button>
+      <button onclick="showPrayer('night2')">صلاة قبل النوم 2</button>
+      <button onclick="showPrayer('morning')">صلاة الصبح</button>
     </div>
 
-    <!-- نموذج إضافة صلاة جديدة -->
-    <div id="addPrayerForm">
-      <label for="newPrayerName">اسم الصلاة (مفتاح فريد بالإنجليزي):</label>
-      <input type="text" id="newPrayerName" placeholder="مثلاً: newPrayer" />
+    <div id="salah" class="prayer" style="display:block;">
+      أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك، لتكن مشيئتك كما في السّماء كذلك على الأرض.  
+      أعطنا خبزنا كفاف يومنا، واغفر لنا ذنوبنا وخطايانا كما نحن نغفر لِمَن أخطأ إلينا،  
+      ولا تُدخلنا في التجربة، لكن نجّنا من الشّرّير، آمين.
 
-      <label for="newPrayerTitle">عنوان الصلاة (ما يظهر على الزر):</label>
-      <input type="text" id="newPrayerTitle" placeholder="مثلاً: صلاة جديدة" />
-
-      <label for="newPrayerText">نص الصلاة:</label>
-      <textarea id="newPrayerText" placeholder="اكتب نص الصلاة هنا..."></textarea>
-
-      <button onclick="addPrayer()">حفظ الصلاة</button>
-      <button onclick="toggleAddPrayer()">إلغاء</button>
+      السلام عليك يا مريم، يا ممتلئة نعمة، الرب معك،  
+      مباركة أنت في النساء، ومباركة ثمرة بطنك سيدنا يسوع المسيح.  
+      يا قديسة مريم، يا والدة الله، صلّي لأجلنا نحن الخطأة،  
+      الآن وفي ساعة موتنا، آمين.
     </div>
 
-    <!-- نموذج حذف صلاة -->
-    <div id="deletePrayerForm">
-      <label for="deletePrayerSelect">اختر الصلاة للحذف:</label>
-      <select id="deletePrayerSelect"></select>
-      <button onclick="deletePrayer()">حذف الصلاة</button>
-      <button onclick="toggleDeletePrayer()">إلغاء</button>
+    <div id="iman" class="prayer">
+      نؤمن بإله واحد، آب ضابط الكل خالق السماء والأرض كلّ ما يُرى وما لا يُرى،  
+      وبربٍّ واحد يسوع المسيح، ابن الله الوحيد، المولود من الآب قبلَ كل الدهور.  
+      إله من إله، نور من نور، إله حق من إله حق، مولود غير مخلوق،  
+      مساوٍ للآب في الجوهر، الذي به كان كلّ شيء،  
+      الذي من أجلنا نحنُ البشر ومن أجلِ خلاصنا نزل من السماء،  
+      وتجسّد من الروح القدس ومن مريم العذراء، وصارَ إنساناً،  
+      وصُلبَ عنّا على عهدِ بيلاطس البنطي، تألّم ومات وقُبِرَ،  
+      وقام في اليوم الثالث كما جاء في الكتب،  
+      وصعِدَ إلى السماء، وجلس عن يمين الله الآب،  
+      وأيضًا يأتي بمجدٍ عظيم ليدينَ الأحياء والأموات، الذي لا فناء لمُلكه.  
+      ونؤمن بالروح القدس، الربّ المُحيي، المنبثق من الآب والابن،  
+      الذي هوَ مع الآب والابن يُسجَد لهُ ويُمَجّد،  
+      الناطق بالأنبياء والرُسل،  
+      وبكنيسة واحدة، جامعة، مقّدَسة، رسوليّة.  
+      ونعترف بمعموديّة واحدة لمغفرة الخطايا،  
+      ونترجّى قيامة الموتى والحياة في الدهر الآتي، آمين.
     </div>
 
-    <div id="prayerDisplay" class="prayer" style="display:none;"></div>
+    <div id="glory" class="prayer">
+      ألمجد للآب والإبن والروح القدس، كما كان في البدء والآن، وعلى الدوام، وإلى دهر الداهرين، آمين.
+    </div>
+
+    <div id="night" class="prayer">
+      إني أختُم، يا ربّ، نهاري بشكركَ، كما افتتحتُهُ بتسبيحِكَ.  
+      فاختم بالخير كلّ أعمال حياتي.  
+      لتكن يا ربّ، خدمتُنا لرضاك، وصلاتُنا لحمدك، وحياتُنا لمجدك.  
+      أحِلَّ، يا ربّ، حُبك في نفوسنا، ونورَك في ضمائرنا، وسلامَك في قلوبنا.  
+      ومع غياب شمسِ هذا النهار، كُنْ لنا شمساً لا تغيب.  
+      وعند رقادنا في هذا الليل، أرمقنا بعين لا تنام،  
+      ولا تحسب علينا، يا ربّ، هفواتِنا.  
+      أعطنا ليلاً هادئاً، ونوماً هنيئاً، ويقظة نشيطة،  
+      وصباحاً يبشرُ بالأفراح،  
+      بشفاعة أمك مريم، فرح البيعة وأمِّ المحبة،  
+      ونُصعد لك المجد، الآن والى الأبد. آمين.
+    </div>
+
+    <div id="night2" class="prayer">
+      يا رب،  
+      بشكرك من كل قلبي على هاليوم.  
+      بسلمك كل تعب مرق، وكل وجع حسيت فيه، وكل هم حملته.  
+      بس كمان، بسلمك اللحظات الحلوة والسعيدة، لأنك كنت فيها، وبتضل فيها النعمة منك.  
+      علّمني يا رب، شاركك بكل لحظة ألم، وما خبّي عنك شي، لأنك بتفهمني.  
+      وعلّمني كمان، إفرح معك،  
+      وتكون فرحتي دايمًا نابعة من حضورك.  
+      يا رب،  
+      بدي حس بوجودك بكل لحظة من نهاري، لأنّي بعرف، من دونك ما بقدر أعمل شي.  
+      كون دايمًا معي، وسندني بنعمتك.  
+      آمين.
+    </div>
+
+    <div id="morning" class="prayer">
+      مباركٌ أنت، أيّها المسيح، يا من بك طلع النهار وزالت ظلمةُ الليل،  
+      يا نور الحقّ وشمس البر، يا من حللتَ في البيعة فاستنارتْ،  
+      وفي الأرض فابتهجتْ، يا من دنا منك الخطأة فتبرّروا،  
+      والضالونَ فاهتدَوا، والعميانُ فأبصروا.  
+      يا من أيقظتنا في هذا الصباح، ووهبتنا نهاراً نفرح به،  
+      نسألك أن تنير عقولَنا وقلوبَنا بنور محبتك،  
+      وليكن مطلعُ صباحِكَ فاتحةَ كلِّ خير.  
+      فسدّد خطانا على سنّة مشوراتِكَ،  
+      ولا تسمح للخطيئة بأن تستعبدَنا،  
+      بل حرِّرنا من ظلمة الأميال، وثبّتنا في مقاصدنا،  
+      وأنرنا في تصرفاتنا اليومَ وفي كلّ أيّام حياتِنا،  
+      فنرتل مبتهجين، لك أيها المسيح، ولأبيك، وروحِك القدوس،  
+      الآن والى الأبد، آمين.
+    </div>
   </div>
 
   <script>
-    // البيانات الابتدائية للصلوات
-    const prayers = {
-      salah: {
-        title: "الصلاة",
-        text: `أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك، لتكن مشيئتك كما في السّماء كذلك على الأرض.  
-أعطنا خبزنا كفاف يومنا، واغفر لنا ذنوبنا وخطايانا كما نحن نغفر لِمَن أخطأ إلينا،  
-ولا تُدخلنا في التجربة، لكن نجّنا من الشّرّير، آمين.
-
-السلام عليك يا مريم، يا ممتلئة نعمة، الرب معك،  
-مباركة أنت في النساء، ومباركة ثمرة بطنك سيدنا يسوع المسيح.  
-يا قديسة مريم، يا والدة الله، صلّي لأجلنا نحن الخطأة،  
-الآن وفي ساعة موتنا، آمين.`
-      },
-      iman: {
-        title: "نص الإيمان",
-        text: `نؤمن بإله واحد، آب ضابط الكل خالق السماء والأرض كلّ ما يُرى وما لا يُرى،  
-وبربٍّ واحد يسوع المسيح، ابن الله الوحيد، المولود من الآب قبلَ كل الدهور.  
-إله من إله، نور من نور، إله حق من إله حق، مولود غير مخلوق،  
-مساوٍ للآب في الجوهر، الذي به كان كلّ شيء،  
-الذي من أجلنا نحنُ البشر ومن أجلِ خلاصنا نزل من السماء،  
-وتجسّد من الروح القدس ومن مريم العذراء، وصارَ إنساناً،  
-وصُلبَ عنّا على عهدِ بيلاطس البنطي، تألّم ومات وقُبِرَ،  
-وقام في اليوم الثالث كما جاء في الكتب،  
-وصعِدَ إلى السماء، وجلس عن يمين الله الآب،  
-وأيضًا يأتي بمجدٍ عظيم ليدينَ الأحياء والأموات، الذي لا فناء لمُلكه.  
-ونؤمن بالروح القدس، الربّ المُحيي، المنبثق من الآب والابن،  
-الذي هوَ مع الآب والابن يُسجَد لهُ ويُمَجّد،  
-الناطق بالأنبياء والرُسل،  
-وبكنيسة واحدة، جامعة، مقّدَسة، رسوليّة.  
-ونعترف بمعموديّة واحدة لمغفرة الخطايا،  
-ونترجّى قيامة الموتى والحياة في الدهر الآتي، آمين.`
-      },
-      glory: {
-        title: "المجد",
-        text: `ألمجد للآب والإبن والروح القدس، كما كان في البدء والآن، وعلى الدوام، وإلى دهر الداهرين، آمين.`
-      },
-      night: {
-        title: "صلاة قبل النوم",
-        text: `إني أختُم، يا ربّ، نهاري بشكركَ، كما افتتحتُهُ بتسبيحِكَ.  
-فاختم بالخير كلّ أعمال حياتي.  
-لتكن يا ربّ، خدمتُنا لرضاك، وصلاتُنا لحمدك، وحياتُنا لمجدك.  
-أحِلَّ، يا ربّ، حُبك في نفوسنا، ونورَك في ضمائرنا، وسلامَك في قلوبنا.  
-ومع غياب شمسِ هذا النهار، كُنْ لنا شمساً لا تغيب.  
-وعند رقادنا في هذا الليل، أرمقنا بعين لا تنام،  
-ولا تحسب علينا، يا ربّ، هفواتِنا.  
-أعطنا ليلاً هادئاً، ونوماً هنيئاً، ويقظة نشيطة،  
-وصباحاً يبشرُ بالأفراح،  
-بشفاعة أمك مريم، فرح البيعة وأمِّ المحبة،  
-ونُصعد لك المجد، الآن والى الأبد. آمين.`
-      },
-      night2: {
-        title: "صلاة قبل النوم 2",
-        text: `يا رب،  
-بشكرك من كل قلبي على هاليوم.  
-بسلمك كل تعب مرق، وكل وجع حسيت فيه، وكل هم حملته.  
-بس كمان، بسلمك اللحظات الحلوة والسعيدة، لأنك كنت فيها، وبتضل فيها النعمة منك.  
-علّمني يا رب، شاركك بكل لحظة ألم، وما خبّي عنك شي، لأنك بتفهمني.  
-وعلّمني كمان، إفرح معك،  
-وتكون فرحتي دايمًا نابعة من حضورك.  
-يا رب،  
-بدي حس بوجودك بكل لحظة من نهاري، لأنّي بعرف، من دونك ما بقدر أعمل شي.  
-كون دايمًا معي، وسندني بنعمتك.  
-آمين.`
-      },
-      morning: {
-        title: "صلاة الصبح",
-        text: `مباركٌ أنت، أيّها المسيح، يا من بك طلع النهار وزالت ظلمةُ الليل،  
-يا نور الحقّ وشمس البر، يا من حللتَ في البيعة فاستنارتْ،  
-وفي الأرض فابتهجتْ، يا من دنا منك الخطأة فتبرّروا،  
-والضالونَ فاهتدَوا، والعميانُ فأبصروا.  
-يا من أيقظتنا في هذا الصباح، ووهبتنا نهاراً نفرح به،  
-نسألك أن تنير عقولَنا وقلوبَنا بنور محبتك،  
-وليكن مطلعُ صباحِكَ فاتحةَ كلِّ خير.  
-فسدّد خطانا على سنّة مشوراتِكَ،  
-ولا تسمح للخطيئة بأن تستعبدَنا،  
-بل حرِّرنا من ظلمة الأميال، وثبّتنا في مقاصدنا،  
-وأنرنا في تصرفاتنا اليومَ وفي كلّ أيّام حياتِنا،  
-فنرتل مبتهجين، لك أيها المسيح، ولأبيك، وروحِك القدوس،  
-الآن والى الأبد، آمين.`
-      }
-    };
-
-    // تحديث أزرار الصلوات
-    function refreshPrayerButtons() {
-      const container = document.getElementById('prayerButtons');
-      container.innerHTML = '';
-      for (const key in prayers) {
-        const btn = document.createElement('button');
-        btn.textContent = prayers[key].title;
-        btn.onclick = () => showPrayer(key);
-        container.appendChild(btn);
-      }
-      refreshDeleteOptions();
-    }
-
-    // عرض الصلاة
     function showPrayer(id) {
-      const display = document.getElementById('prayerDisplay');
-      if (prayers[id]) {
-        display.textContent = prayers[id].text;
-        display.style.display = 'block';
-      } else {
-        display.textContent = 'الصلاة غير موجودة.';
-        display.style.display = 'block';
-      }
-      // إخفاء نماذج الإدخال عند عرض الصلاة
-      document.getElementById('addPrayerForm').style.display = 'none';
-      document.getElementById('deletePrayerForm').style.display = 'none';
+      document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
     }
-
-    // إظهار/إخفاء نموذج إضافة صلاة
-    function toggleAddPrayer() {
-      const form = document.getElementById('addPrayerForm');
-      form.style.display = form.style.display === 'block' ? 'none' : 'block';
-      // إخفاء نموذج الحذف
-      document.getElementById('deletePrayerForm').style.display = 'none';
-      // إخفاء النص
-      document.getElementById('prayerDisplay').style.display = 'none';
-    }
-
-    // إضافة صلاة جديدة
-    function addPrayer() {
-      const key = document.getElementById('newPrayerName').value.trim();
-      const title = document.getElementById('newPrayerTitle').value.trim();
-      const text = document.getElementById('newPrayerText').value.trim();
-
-      if (!key || !title || !text) {
-        alert('الرجاء ملء جميع الحقول.');
-        return;
-      }
-      if (prayers[key]) {
-        alert('اسم الصلاة مستخدم مسبقًا، اختر اسمًا مختلفًا.');
-        return;
-      }
-
-      prayers[key] = { title, text };
-      refreshPrayerButtons();
-
-      // تنظيف الحقول وإخفاء النموذج
-      document.getElementById('newPrayerName').value = '';
-      document.getElementById('newPrayerTitle').value = '';
-      document.getElementById('newPrayerText').value = '';
-      document.getElementById('addPrayerForm').style.display = 'none';
-      alert('تمت إضافة الصلاة بنجاح!');
-    }
-
-    // إظهار/إخفاء نموذج حذف صلاة
-    function toggleDeletePrayer() {
-      const form = document.getElementById('deletePrayerForm');
-      form.style.display = form.style.display === 'block' ? 'none' : 'block';
-      // إخفاء نموذج الإضافة
-      document.getElementById('addPrayerForm').style.display = 'none';
-      // إخفاء النص
-      document.getElementById('prayerDisplay').style.display = 'none';
-      refreshDeleteOptions();
-    }
-
-    // تحديث خيارات الحذف في القائمة المنسدلة
-    function refreshDeleteOptions() {
-      const select = document.getElementById('deletePrayerSelect');
-      select.innerHTML = '';
-      for (const key in prayers) {
-        const option = document.createElement('option');
-        option.value = key;
-        option.textContent = prayers[key].title;
-        select.appendChild(option);
-      }
-    }
-
-    // حذف الصلاة المحددة
-    function deletePrayer() {
-      const select = document.getElementById('deletePrayerSelect');
-      const key = select.value;
-      if (!key) {
-        alert('اختر الصلاة للحذف.');
-        return;
-      }
-      const confirmDel = confirm(`هل أنت متأكد من حذف الصلاة "${prayers[key].title}"؟`);
-      if (!confirmDel) return;
-
-      delete prayers[key];
-      refreshPrayerButtons();
-      document.getElementById('deletePrayerForm').style.display = 'none';
-      document.getElementById('prayerDisplay').style.display = 'none';
-      alert('تم حذف الصلاة.');
-    }
-
-    // تهيئة العرض
-    refreshPrayerButtons();
-    showPrayer('salah');
   </script>
 </body>
 </html>
