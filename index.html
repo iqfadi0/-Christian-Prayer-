@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>✞</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
-  
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="images/background.jpg" />
-
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
@@ -19,7 +17,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed; /* هنا تم التعديل: تجعل الخلفية ثابتة */
+      background-attachment: fixed;
       color: #fff;
       padding: 20px;
       backdrop-filter: brightness(0.6);
@@ -32,6 +30,7 @@
       padding: 30px;
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
       min-height: 600px;
+      position: relative;
     }
     h1 {
       text-align: center;
@@ -65,7 +64,64 @@
       line-height: 1.8;
       font-size: 24px;
       display: none;
+      margin-top: 20px;
     }
+
+    /* مودال النافذة المنبثقة */
+    #modal {
+      display: none; /* مخفي افتراضياً */
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #modalContent {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      color: #fff;
+      text-align: right;
+    }
+    #modalContent label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    #modalContent input, #modalContent textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      font-family: 'Tajawal', sans-serif;
+    }
+    #modalContent textarea {
+      resize: vertical;
+      height: 120px;
+    }
+    #modalContent .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    #modalContent .modal-buttons button {
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    #modalContent .modal-buttons button.cancel {
+      background-color: #888;
+      color: #eee;
+    }
+    #modalContent .modal-buttons button.cancel:hover {
+      background-color: #666;
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 15px;
@@ -86,15 +142,17 @@
 <body>
   <div class="container">
     <h1>✞</h1>
-    <div class="btn-group">
+    <div class="btn-group" id="buttonsContainer">
       <button onclick="showPrayer('salah')">الصلاة</button>
       <button onclick="showPrayer('iman')">نص الإيمان</button>
       <button onclick="showPrayer('glory')">المجد</button>
       <button onclick="showPrayer('night')">صلاة قبل النوم</button>
       <button onclick="showPrayer('night2')">صلاة قبل النوم 2</button>
       <button onclick="showPrayer('morning')">صلاة الصبح</button>
+      <button onclick="openModal()">+ إضافة صلاة</button>
     </div>
 
+    <!-- الصلوات الثابتة -->
     <div id="salah" class="prayer" style="display:block;">
       أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك، لتكن مشيئتك كما في السّماء كذلك على الأرض.  
       أعطنا خبزنا كفاف يومنا، واغفر لنا ذنوبنا وخطايانا كما نحن نغفر لِمَن أخطأ إلينا،  
@@ -172,13 +230,123 @@
       فنرتل مبتهجين، لك أيها المسيح، ولأبيك، وروحِك القدوس،  
       الآن والى الأبد، آمين.
     </div>
+
+    <!-- هنا سيتم إضافة الصلوات الجديدة -->
+  </div>
+
+  <!-- مودال إضافة الصلاة -->
+  <div id="modal">
+    <div id="modalContent">
+      <h2>إضافة صلاة جديدة</h2>
+      <label for="prayerName">اسم الصلاة:</label>
+      <input type="text" id="prayerName" placeholder="أدخل اسم الصلاة" />
+      <label for="prayerText">نص الصلاة:</label>
+      <textarea id="prayerText" placeholder="أدخل نص الصلاة"></textarea>
+      <div class="modal-buttons">
+        <button class="cancel" onclick="closeModal()">إلغاء</button>
+        <button onclick="addPrayer()">حفظ</button>
+      </div>
+    </div>
   </div>
 
   <script>
+    const container = document.querySelector('.container');
+    const buttonsContainer = document.getElementById('buttonsContainer');
+    const modal = document.getElementById('modal');
+
+    // عرض الصلاة حسب id
     function showPrayer(id) {
       document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
+      const el = document.getElementById(id);
+      if(el) {
+        el.style.display = 'block';
+      } else {
+        // لو الصلاة جديدة وعندها id غير موجود، نحاول نعرضها من العناصر المضافة ديناميكياً
+        const dynamicEl = document.querySelector(`.prayer[data-id="${id}"]`);
+        if(dynamicEl) dynamicEl.style.display = 'block';
+      }
     }
+
+    // فتح مودال إضافة الصلاة
+    function openModal() {
+      modal.style.display = 'flex';
+      document.getElementById('prayerName').value = '';
+      document.getElementById('prayerText').value = '';
+    }
+
+    // إغلاق المودال
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // إضافة الصلاة الجديدة
+    function addPrayer() {
+      const name = document.getElementById('prayerName').value.trim();
+      const text = document.getElementById('prayerText').value.trim();
+
+      if (!name || !text) {
+        alert('يرجى إدخال اسم الصلاة ونصها.');
+        return;
+      }
+
+      // إنشاء معرف فريد (يمكن تحسينه)
+      const id = 'custom_' + Date.now();
+
+      // إنشاء زر جديد للصلاة
+      const btn = document.createElement('button');
+      btn.textContent = name;
+      btn.onclick = () => showPrayer(id);
+      buttonsContainer.insertBefore(btn, buttonsContainer.lastElementChild); // قبل زر الإضافة
+
+      // إنشاء div جديد لنص الصلاة
+      const prayerDiv = document.createElement('div');
+      prayerDiv.className = 'prayer';
+      prayerDiv.setAttribute('data-id', id);
+      prayerDiv.textContent = text;
+      container.appendChild(prayerDiv);
+
+      // حفظ الصلاة في التخزين المحلي
+      savePrayerToStorage({id, name, text});
+
+      closeModal();
+      showPrayer(id);
+    }
+
+    // حفظ الصلوات في localStorage
+    function savePrayerToStorage(prayer) {
+      let prayers = JSON.parse(localStorage.getItem('customPrayers') || '[]');
+      prayers.push(prayer);
+      localStorage.setItem('customPrayers', JSON.stringify(prayers));
+    }
+
+    // تحميل الصلوات من التخزين المحلي
+    function loadPrayersFromStorage() {
+      const prayers = JSON.parse(localStorage.getItem('customPrayers') || '[]');
+      prayers.forEach(({id, name, text}) => {
+        // إنشاء زر
+        const btn = document.createElement('button');
+        btn.textContent = name;
+        btn.onclick = () => showPrayer(id);
+        buttonsContainer.insertBefore(btn, buttonsContainer.lastElementChild);
+
+        // إنشاء div
+        const prayerDiv = document.createElement('div');
+        prayerDiv.className = 'prayer';
+        prayerDiv.setAttribute('data-id', id);
+        prayerDiv.textContent = text;
+        container.appendChild(prayerDiv);
+      });
+    }
+
+    // تحميل الصلوات المضافة عند بداية التحميل
+    window.onload = () => {
+      loadPrayersFromStorage();
+    };
+
+    // إغلاق المودال عند الضغط خارج محتواه
+    window.onclick = (e) => {
+      if (e.target === modal) closeModal();
+    };
   </script>
 </body>
 </html>
