@@ -5,19 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>✞</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="images/background.jpg" />
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Tajawal', sans-serif;
     }
     body {
-      background-image: url('images/background.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      background: url('images/background.jpg') no-repeat center/cover fixed;
       color: #fff;
       padding: 20px;
       backdrop-filter: brightness(0.6);
@@ -25,7 +19,7 @@
     .container {
       max-width: 700px;
       margin: auto;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0,0,0,0.6);
       border-radius: 16px;
       padding: 30px;
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
@@ -37,6 +31,20 @@
       margin-bottom: 25px;
       font-size: 28px;
       color: #f2d057;
+      position: relative;
+    }
+    /* زر حذف بحرف × على يمين العنوان */
+    #deleteBtn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: transparent;
+      border: none;
+      color: #f2d057;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
     }
     .btn-group {
       display: flex;
@@ -66,19 +74,18 @@
       display: none;
       margin-top: 20px;
     }
-
-    /* مودال النافذة المنبثقة */
-    #modal {
-      display: none; /* مخفي افتراضياً */
+    /* مودال الإضافة والحذف */
+    .modal {
+      display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.7);
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
-    #modalContent {
-      background-color: #222;
+    .modal-content {
+      background: #222;
       padding: 20px;
       border-radius: 12px;
       max-width: 500px;
@@ -86,12 +93,12 @@
       color: #fff;
       text-align: right;
     }
-    #modalContent label {
+    .modal-content label {
       display: block;
       margin-bottom: 6px;
       font-weight: bold;
     }
-    #modalContent input, #modalContent textarea {
+    .modal-content input, .modal-content textarea, .modal-content select {
       width: 100%;
       padding: 8px;
       margin-bottom: 12px;
@@ -100,28 +107,35 @@
       font-size: 16px;
       font-family: 'Tajawal', sans-serif;
     }
-    #modalContent textarea {
+    .modal-content textarea {
       resize: vertical;
       height: 120px;
     }
-    #modalContent .modal-buttons {
+    .modal-buttons {
       display: flex;
       justify-content: flex-end;
       gap: 10px;
     }
-    #modalContent .modal-buttons button {
+    .modal-buttons button {
       padding: 8px 16px;
       font-size: 16px;
       border-radius: 8px;
+      cursor: pointer;
     }
-    #modalContent .modal-buttons button.cancel {
+    .modal-buttons button.cancel {
       background-color: #888;
       color: #eee;
     }
-    #modalContent .modal-buttons button.cancel:hover {
+    .modal-buttons button.cancel:hover {
       background-color: #666;
     }
-
+    .modal-buttons button.delete {
+      background-color: #f44336;
+      color: #fff;
+    }
+    .modal-buttons button.delete:hover {
+      background-color: #d32f2f;
+    }
     @media (max-width: 600px) {
       .container {
         padding: 15px;
@@ -141,7 +155,10 @@
 </head>
 <body>
   <div class="container">
-    <h1>✞</h1>
+    <h1>
+      ✞
+      <button id="deleteBtn" title="حذف صلاة">×</button>
+    </h1>
     <div class="btn-group" id="buttonsContainer">
       <button onclick="showPrayer('salah')">الصلاة</button>
       <button onclick="showPrayer('iman')">نص الإيمان</button>
@@ -152,7 +169,7 @@
       <button onclick="openModal()">+ إضافة صلاة</button>
     </div>
 
-    <!-- الصلوات الثابتة -->
+    <!-- الصلوات الأصلية -->
     <div id="salah" class="prayer" style="display:block;">
       أبانا الّذي في السّماوات، ليتقدّس اسمك، ليأتِ ملكوتك، لتكن مشيئتك كما في السّماء كذلك على الأرض.  
       أعطنا خبزنا كفاف يومنا، واغفر لنا ذنوبنا وخطايانا كما نحن نغفر لِمَن أخطأ إلينا،  
@@ -230,123 +247,178 @@
       فنرتل مبتهجين، لك أيها المسيح، ولأبيك، وروحِك القدوس،  
       الآن والى الأبد، آمين.
     </div>
-
-    <!-- هنا سيتم إضافة الصلوات الجديدة -->
   </div>
 
-  <!-- مودال إضافة الصلاة -->
-  <div id="modal">
-    <div id="modalContent">
-      <h2>إضافة صلاة جديدة</h2>
+  <!-- مودال إضافة صلاة -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <h3>إضافة صلاة جديدة</h3>
       <label for="prayerName">اسم الصلاة:</label>
-      <input type="text" id="prayerName" placeholder="أدخل اسم الصلاة" />
+      <input type="text" id="prayerName" placeholder="مثال: صلاة المساء" />
       <label for="prayerText">نص الصلاة:</label>
-      <textarea id="prayerText" placeholder="أدخل نص الصلاة"></textarea>
+      <textarea id="prayerText" placeholder="اكتب نص الصلاة هنا"></textarea>
       <div class="modal-buttons">
-        <button class="cancel" onclick="closeModal()">إلغاء</button>
-        <button onclick="addPrayer()">حفظ</button>
+        <button onclick="closeModal()" class="cancel">إلغاء</button>
+        <button onclick="addPrayer()" class="delete">حفظ</button>
       </div>
     </div>
   </div>
 
-  <script>
-    const container = document.querySelector('.container');
-    const buttonsContainer = document.getElementById('buttonsContainer');
-    const modal = document.getElementById('modal');
+  <!-- مودال حذف صلاة -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <h3>اختر الصلاة للحذف</h3>
+      <select id="deleteSelect"></select>
+      <div class="modal-buttons">
+        <button onclick="closeDeleteModal()" class="cancel">إلغاء</button>
+        <button onclick="confirmDelete()" class="delete">حذف</button>
+      </div>
+    </div>
+  </div>
 
-    // عرض الصلاة حسب id
-    function showPrayer(id) {
-      document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
-      const el = document.getElementById(id);
-      if(el) {
-        el.style.display = 'block';
-      } else {
-        // لو الصلاة جديدة وعندها id غير موجود، نحاول نعرضها من العناصر المضافة ديناميكياً
-        const dynamicEl = document.querySelector(`.prayer[data-id="${id}"]`);
-        if(dynamicEl) dynamicEl.style.display = 'block';
-      }
+<script>
+  const buttonsContainer = document.getElementById('buttonsContainer');
+  const container = document.querySelector('.container');
+  const addModal = document.getElementById('addModal');
+  const deleteModal = document.getElementById('deleteModal');
+  const deleteBtn = document.getElementById('deleteBtn');
+  const deleteSelect = document.getElementById('deleteSelect');
+
+  // الصلوات الأصلية مع الـ id
+  const defaultPrayers = [
+    {id: 'salah', name: 'الصلاة', text: `أبانا الّذي في السّماوات... (النص الكامل هنا)`},
+    {id: 'iman', name: 'نص الإيمان', text: `نؤمن بإله واحد... (النص الكامل هنا)`},
+    {id: 'glory', name: 'المجد', text: `ألمجد للآب...`},
+    {id: 'night', name: 'صلاة قبل النوم', text: `إني أختُم...`},
+    {id: 'night2', name: 'صلاة قبل النوم 2', text: `يا رب، بشكرك من كل قلبي...`},
+    {id: 'morning', name: 'صلاة الصبح', text: `مباركٌ أنت، أيّها المسيح...`}
+  ];
+
+  // تحميل الصلوات من localStorage أو نستخدم الأصلية
+  function loadPrayers() {
+    let stored = localStorage.getItem('customPrayers');
+    let customPrayers = stored ? JSON.parse(stored) : [];
+    // أولاً نضيف الصلوات الأصلية
+    defaultPrayers.forEach(p => {
+      createPrayerButton(p.id, p.name, p.text, false);
+    });
+    // ثم الصلوات المضافة
+    customPrayers.forEach(p => {
+      createPrayerButton(p.id, p.name, p.text, true);
+    });
+    // نعرض أول صلاة
+    showPrayer(defaultPrayers[0].id);
+  }
+
+  // إنشاء زر ونص الصلاة
+  function createPrayerButton(id, name, text, isCustom) {
+    // زر
+    if(document.querySelector(`button[data-id="${id}"]`)) return; // لا تضيف مكرر
+    const btn = document.createElement('button');
+    btn.textContent = name;
+    btn.dataset.id = id;
+    btn.onclick = () => showPrayer(id);
+    buttonsContainer.insertBefore(btn, buttonsContainer.lastElementChild);
+
+    // نص الصلاة
+    if(!document.querySelector(`.prayer[data-id="${id}"]`)) {
+      const div = document.createElement('div');
+      div.className = 'prayer';
+      div.dataset.id = id;
+      div.textContent = text;
+      div.style.display = 'none';
+      container.appendChild(div);
     }
+  }
 
-    // فتح مودال إضافة الصلاة
-    function openModal() {
-      modal.style.display = 'flex';
-      document.getElementById('prayerName').value = '';
-      document.getElementById('prayerText').value = '';
+  // عرض الصلاة
+  function showPrayer(id) {
+    document.querySelectorAll('.prayer').forEach(p => p.style.display = 'none');
+    const el = document.querySelector(`.prayer[data-id="${id}"]`);
+    if(el) el.style.display = 'block';
+  }
+
+  // فتح/غلق مودال إضافة الصلاة
+  function openModal() {
+    document.getElementById('prayerName').value = '';
+    document.getElementById('prayerText').value = '';
+    addModal.style.display = 'flex';
+  }
+  function closeModal() {
+    addModal.style.display = 'none';
+  }
+
+  // فتح/غلق مودال الحذف
+  deleteBtn.onclick = () => {
+    populateDeleteList();
+    deleteModal.style.display = 'flex';
+  };
+  function closeDeleteModal() {
+    deleteModal.style.display = 'none';
+  }
+
+  // ملء قائمة الحذف
+  function populateDeleteList() {
+    deleteSelect.innerHTML = '';
+    // نعرض الصلوات المضافة فقط (نمنع حذف الأصلية)
+    let stored = localStorage.getItem('customPrayers');
+    let customPrayers = stored ? JSON.parse(stored) : [];
+    if(customPrayers.length === 0) {
+      const option = document.createElement('option');
+      option.textContent = 'لا توجد صلوات للحذف';
+      option.disabled = true;
+      deleteSelect.appendChild(option);
+      return;
     }
+    customPrayers.forEach(p => {
+      const option = document.createElement('option');
+      option.value = p.id;
+      option.textContent = p.name;
+      deleteSelect.appendChild(option);
+    });
+  }
 
-    // إغلاق المودال
-    function closeModal() {
-      modal.style.display = 'none';
+  // إضافة صلاة جديدة
+  function addPrayer() {
+    const name = document.getElementById('prayerName').value.trim();
+    const text = document.getElementById('prayerText').value.trim();
+    if(!name || !text) {
+      alert('يرجى إدخال اسم الصلاة ونصها.');
+      return;
     }
+    // جلب الصلوات المضافة من localStorage
+    let stored = localStorage.getItem('customPrayers');
+    let customPrayers = stored ? JSON.parse(stored) : [];
+    // انشاء id جديد (مثلاً timestamp)
+    let id = 'custom_' + Date.now();
+    // اضافة للصلاة
+    customPrayers.push({id, name, text});
+    localStorage.setItem('customPrayers', JSON.stringify(customPrayers));
+    createPrayerButton(id, name, text, true);
+    closeModal();
+    showPrayer(id);
+  }
 
-    // إضافة الصلاة الجديدة
-    function addPrayer() {
-      const name = document.getElementById('prayerName').value.trim();
-      const text = document.getElementById('prayerText').value.trim();
+  // حذف صلاة مضافة
+  function confirmDelete() {
+    const id = deleteSelect.value;
+    if(!id) return alert('يرجى اختيار الصلاة للحذف');
+    // حذف من localStorage
+    let stored = localStorage.getItem('customPrayers');
+    let customPrayers = stored ? JSON.parse(stored) : [];
+    customPrayers = customPrayers.filter(p => p.id !== id);
+    localStorage.setItem('customPrayers', JSON.stringify(customPrayers));
+    // حذف من الواجهة
+    const btn = buttonsContainer.querySelector(`button[data-id="${id}"]`);
+    if(btn) btn.remove();
+    const div = container.querySelector(`.prayer[data-id="${id}"]`);
+    if(div) div.remove();
+    closeDeleteModal();
+    // عرض أول صلاة أصلية بعد الحذف
+    showPrayer(defaultPrayers[0].id);
+  }
 
-      if (!name || !text) {
-        alert('يرجى إدخال اسم الصلاة ونصها.');
-        return;
-      }
-
-      // إنشاء معرف فريد (يمكن تحسينه)
-      const id = 'custom_' + Date.now();
-
-      // إنشاء زر جديد للصلاة
-      const btn = document.createElement('button');
-      btn.textContent = name;
-      btn.onclick = () => showPrayer(id);
-      buttonsContainer.insertBefore(btn, buttonsContainer.lastElementChild); // قبل زر الإضافة
-
-      // إنشاء div جديد لنص الصلاة
-      const prayerDiv = document.createElement('div');
-      prayerDiv.className = 'prayer';
-      prayerDiv.setAttribute('data-id', id);
-      prayerDiv.textContent = text;
-      container.appendChild(prayerDiv);
-
-      // حفظ الصلاة في التخزين المحلي
-      savePrayerToStorage({id, name, text});
-
-      closeModal();
-      showPrayer(id);
-    }
-
-    // حفظ الصلوات في localStorage
-    function savePrayerToStorage(prayer) {
-      let prayers = JSON.parse(localStorage.getItem('customPrayers') || '[]');
-      prayers.push(prayer);
-      localStorage.setItem('customPrayers', JSON.stringify(prayers));
-    }
-
-    // تحميل الصلوات من التخزين المحلي
-    function loadPrayersFromStorage() {
-      const prayers = JSON.parse(localStorage.getItem('customPrayers') || '[]');
-      prayers.forEach(({id, name, text}) => {
-        // إنشاء زر
-        const btn = document.createElement('button');
-        btn.textContent = name;
-        btn.onclick = () => showPrayer(id);
-        buttonsContainer.insertBefore(btn, buttonsContainer.lastElementChild);
-
-        // إنشاء div
-        const prayerDiv = document.createElement('div');
-        prayerDiv.className = 'prayer';
-        prayerDiv.setAttribute('data-id', id);
-        prayerDiv.textContent = text;
-        container.appendChild(prayerDiv);
-      });
-    }
-
-    // تحميل الصلوات المضافة عند بداية التحميل
-    window.onload = () => {
-      loadPrayersFromStorage();
-    };
-
-    // إغلاق المودال عند الضغط خارج محتواه
-    window.onclick = (e) => {
-      if (e.target === modal) closeModal();
-    };
-  </script>
+  window.onload = loadPrayers;
+</script>
 </body>
 </html>
